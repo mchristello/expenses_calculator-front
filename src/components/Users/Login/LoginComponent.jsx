@@ -2,11 +2,10 @@ import { useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { helix } from 'ldrs'
+import { Spinner } from "flowbite-react";
 
 export const LoginComponent = () => {
 
-    helix.register()
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     // const redirect = useRouter();
@@ -15,7 +14,8 @@ export const LoginComponent = () => {
     const onSubmit = async (data) => {
         setIsLoading(true);
         try {
-            await signIn('login-next-auth', { ...data })
+            console.log({data});
+            // await signIn('login-next-auth', { ...data })
         } catch (error) {
             console.log(`CATCH IN LOGIN COMPONENT -->`, error.message);
         } finally {
@@ -24,20 +24,12 @@ export const LoginComponent = () => {
     }
 
     return (
-        <section className="flex flex-col text-center mt-5">
-            <h2>Login</h2>
+        <section className="flex flex-col text-center mt-1">
             <div className="w-[50vw]">
-                <div className="m-10 sm:mx-auto sm:w-full sm:max-w-sm">
+                <div className="m-5 sm:mx-auto sm:w-full sm:max-w-sm">
                     { isLoading 
                         ? 
-                        <div className="mx-auto my-8">
-                            <l-helix
-                                size="45"
-                                speed="2.5" 
-                                color="black" 
-                            ></l-helix>
-
-                        </div>
+                            <Spinner aria-label="Small spinner example" color="success" size="sm" />
                         : <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                             <div className="p-6">
                                 <label htmlFor="email" className="block text-md font-medium leading-6 text-gray-900">

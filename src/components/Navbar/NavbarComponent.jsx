@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-export const NavbarComponent = () => {
+const NavbarComponent = () => {
 
     return (
         <section className="w-[100vw] mt-10 p-6">
@@ -9,10 +9,10 @@ export const NavbarComponent = () => {
                     <Link href='/' className="p-8">Home</Link>
                 </li>
                 <li>
-                    <Link href='/expenses/expenses' className="p-8">Expenses</Link>
+                    <Link href='/expenses' className="p-8">Expenses</Link>
                 </li>
                 <li>
-                    <Link href='/incomes/incomes' className="p-8">Incomes</Link>
+                    <Link href='/incomes' className="p-8">Incomes</Link>
                 </li>
                 <li>
                     <Link href='/user/login' className="p-8">Login</Link>
@@ -24,3 +24,5 @@ export const NavbarComponent = () => {
         </section>
     )
 }
+
+export default NavbarComponent;

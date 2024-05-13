@@ -1,5 +1,5 @@
-import { NavbarComponent } from "@/components/Navbar/NavbarComponent"
 import Head from "next/head"
+import NavbarComponent from "../components/Navbar/NavbarComponent";
 
 const Layout = ({ children }) => {
 
@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
                 <title>Page Title</title>
             </Head>
             <NavbarComponent />
-            <main className="flex flex-col items-center justify-center w-full h-[100vh] bg-main gap-6">
+            <main className="flex flex-col items-center w-full h-[100vh] gap-6">
                 {children}
             </main>
         </>
