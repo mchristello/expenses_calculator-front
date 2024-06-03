@@ -16,7 +16,11 @@
   }
 }
 
-body {
+/* body {
   background: linear-gradient(to top, #64c59d 5%, #f3d8d8 20%, #f0eeee 75%);
-}
+} */
 
+span {
+  color: #2057bd;
+  font-weight: bold;
+}

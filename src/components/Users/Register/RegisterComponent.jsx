@@ -1,6 +1,7 @@
-import { useForm, SubmitHandler } from "react-hook-form";
-import { Spinner } from "flowbite-react";
+import { useForm } from "react-hook-form";
+import { Spinner } from 'flowbite-react';
 import { useState } from "react";
+import { connectNextURL } from "utils/serverConnections.js";
 
 
 const RegisterComponent = () => {
@@ -11,8 +12,13 @@ const RegisterComponent = () => {
     const onSubmit = async (data) => {
         setIsLoading(true);
         try {
-            console.log(data);
-            // await signIn('login-next-auth', { ...data })
+            const body = { ...data }
+            const response = await connectNextURL.post(`/users`, { ...body })
+
+            console.log({response});
+            if(response.status === 200) {
+                redirect.push('/user/login')
+            }
         } catch (error) {
             console.log(`CATCH IN LOGIN COMPONENT -->`, error.message);
         } finally {
@@ -23,7 +29,7 @@ const RegisterComponent = () => {
     return (
         <section>
             { isLoading ? 
-                <Spinner aria-label="Small spinner example" color="success" size="sm" />
+                <Spinner color="success" />
                 : 
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col text-center mt-2">
                     <div className="flex flex-row p-2">

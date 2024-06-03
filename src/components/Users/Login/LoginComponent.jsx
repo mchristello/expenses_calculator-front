@@ -1,21 +1,19 @@
+import { Spinner } from "flowbite-react";
 import { useState } from "react"
-import { SubmitHandler, useForm } from "react-hook-form";
+import {  useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { Spinner } from "flowbite-react";
 
 export const LoginComponent = () => {
 
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    // const redirect = useRouter();
     const [ isLoading, setIsLoading ] = useState(false);
     
     const onSubmit = async (data) => {
         setIsLoading(true);
         try {
-            console.log({data});
-            // await signIn('login-next-auth', { ...data })
+            await signIn('login-next-auth', { ...data }, { callbackUrl: '/' })
         } catch (error) {
             console.log(`CATCH IN LOGIN COMPONENT -->`, error.message);
         } finally {
@@ -29,7 +27,7 @@ export const LoginComponent = () => {
                 <div className="m-5 sm:mx-auto sm:w-full sm:max-w-sm">
                     { isLoading 
                         ? 
-                            <Spinner aria-label="Small spinner example" color="success" size="sm" />
+                            <Spinner color="success" />
                         : <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                             <div className="p-6">
                                 <label htmlFor="email" className="block text-md font-medium leading-6 text-gray-900">

@@ -1,13 +1,22 @@
+import { SessionProvider } from 'next-auth/react';
 import '../styles/globals.css';
 import Layout from './layout'
+import { ExpenseProvider } from 'context/ExpensesContext';
+import { IncomeProvider } from 'context/IncomesContext';
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps, session  }) {
   return (
     
     <>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <SessionProvider session={session}>
+        <ExpenseProvider >
+          <IncomeProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </IncomeProvider>
+        </ExpenseProvider>
+      </SessionProvider>
     </>
 
   )
